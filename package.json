@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
     "prestart": "babel ./src --out-dir build",
     "start": "node ./src/bin/www",
