@@ -13,15 +13,20 @@ import {
 // The reason for using an array is that the number of such queries will grow as
 // the number of tables in our database grows.
 
-export const executeQueryArray = async (arr) =>
-  new Promise((resolve) => {
-    const stop = arr.length;
-    arr.forEach(async (q, index) => {
-      await pool.query(q);
-      if (index + 1 === stop) resolve();
+export const executeQueryArray = async (arr) => {
+  try {
+    new Promise((resolve) => {
+      const stop = arr.length;
+      arr.forEach(async (q, index) => {
+        await pool.query(q);
+        if (index + 1 === stop) resolve();
+      });
     });
-  });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-export const createTables = () => executeQueryArray([createMessagesTable]);
-export const insertIntoTables = () => executeQueryArray([insertMessages]);
-export const dropTables = () => executeQueryArray([dropMessagesTable]);
+export const createTables = () => executeQueryArray([ createMessagesTable ]);
+export const insertIntoTables = () => executeQueryArray([ insertMessages ]);
+export const dropTables = () => executeQueryArray([ dropMessagesTable ]);
