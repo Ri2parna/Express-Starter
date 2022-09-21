@@ -1,8 +1,10 @@
 import { pool } from './pool';
+
 const assert = require('assert');
+
 assert(pool.totalCount === 0);
 const firefly = async () => {
-  const client = pool.connect(function (err) {
+  const client = pool.connect((err) => {
     if (err) {
       return console.error('could not connect to postgres', err);
     }

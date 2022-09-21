@@ -1,12 +1,12 @@
 import { pg } from 'pg';
 import { connectionString } from '../settings';
 
-var client = new pg.Client(connectionString);
-client.connect(function (err) {
+const client = new pg.Client(connectionString);
+client.connect((err) => {
   if (err) {
     return console.error('could not connect to postgres', err);
   }
-  client.query('SELECT NOW() AS "theTime"', function (err, result) {
+  client.query('SELECT NOW() AS "theTime"', (err, result) => {
     if (err) {
       return console.error('error running query', err);
     }
